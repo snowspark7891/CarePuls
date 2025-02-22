@@ -17,6 +17,7 @@ export enum FormFieldTypes {
   CHECKBOX = "checkbox",
   DATE_PICKER = "datePicker",
   SELECT = "select",
+  SKELETON= "skeleton"
 }
 
 const PatientForm = () => {
@@ -26,14 +27,14 @@ const PatientForm = () => {
   const form = useForm<z.infer<typeof UserFormValidation>>({
     resolver: zodResolver(UserFormValidation),
     defaultValues: {
-      username: "",
+      name: "",
       email: "",
       phone: "",
     },
   });
 
   async function onSubmit({
-    username,
+    name,
     email,
     phone,
   }: z.infer<typeof UserFormValidation>) {
@@ -41,7 +42,7 @@ const PatientForm = () => {
     try {
       console.log("its done");
       const userData = {
-        username,
+        name,
         email,
         phone,
       };
@@ -65,7 +66,7 @@ const PatientForm = () => {
         </section>
         <CustomFormfield
           fieldType={FormFieldTypes.INPUT}
-          name="username"
+          name="name"
           label="Username"
           iconSrc="/assets/icons/user.svg"
           placeHolder="Fullname"
@@ -127,7 +128,7 @@ export default PatientForm;
 //   const form = useForm<z.infer<typeof UserFormValidation>>({
 //     resolver: zodResolver(UserFormValidation),
 //     defaultValues: {
-//       username: "",
+//       name: "",
 //       email: "",
 //       phone: "",
 //     },
@@ -135,7 +136,7 @@ export default PatientForm;
 
 //   // 2. Define a submit handler.
 //   async function onSubmit({
-//     username,
+//     name,
 //     email,
 //     phone,
 //   }: z.infer<typeof UserFormValidation>) {
@@ -145,7 +146,7 @@ export default PatientForm;
 //    console.log('its done');
 
 //     const userData = {
-//         username,
+//         name,
 //         email,
 //         phone,
 //       };

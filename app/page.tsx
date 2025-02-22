@@ -1,16 +1,24 @@
 import PaitentForm from "@/components/forms/PaitentForm";
-
-
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import PassKeyModal from "@/components/ui/PassKeyModal";
 
-export default function Home() {
+export default function Home({searchParams}:SearchParamProps) {
+   const isAdmin = searchParams.admin === "true";
+
   return (
     <div className="flex h-screen max-h-screen">
-     
-     {/* otp verifucation ]]]]]]]]]]]]]]]]]]]]]]]]]]] */}
-      <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[496px]">
+      {/* otp verifucation ]]]]]]]]]]]]]]]]]]]]]]]]]]] */
+        isAdmin && <PassKeyModal/>
+      }
+
+
+
+
+
+      <section className="remove-scrollbar container">
+        <div className="sub-container max-w-[896px] flex-1 flex-col py-20">
           <Image
             alt="Mainlogo"
             height={1000}
