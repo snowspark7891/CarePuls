@@ -21,3 +21,4 @@ client
 export const databases = new sdk.Databases(client); // Export functionality of appwrite client
 export const storage = new sdk.Storage(client);
 export const users = new sdk.Users(client);
+export const messaging = new sdk.Messaging(client);

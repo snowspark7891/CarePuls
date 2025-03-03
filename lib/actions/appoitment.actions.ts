@@ -1,8 +1,8 @@
 'use server'
 import { ID, Query } from "node-appwrite";
 import { InputFile } from "node-appwrite/file";
-import { ConfigVariable, databases, storage } from "../apwrite/appwrite.config";
-import { parseStringify } from "../utils";
+import { ConfigVariable, databases, messaging, storage } from "../apwrite/appwrite.config";
+import { formatDateTime, parseStringify } from "../utils";
 import { log } from "console";
 import { Appointment } from "@/types/appwrite.types";
 import { revalidatePath } from "next/cache";
@@ -106,11 +106,35 @@ export const updateAppointment = async ({appointmentId,userId,appointment,type}:
       throw new Error('Appointment not updated');
     }
     //sms notification
+    const smsMessage = `
+    Hi, CarePulse here to inform you that
+    ${type === 'schedueled' ? `your appointment has been scheduled at ${formatDateTime(appointment.schedule!)}` : 
+      `your appointment has been cancelled !
+      because of ${appointment.cancellationReason}`}`
+    ;
 
+
+
+    await sendSMSnotification(userId,smsMessage);
     revalidatePath('/admin')
     return parseStringify(updatedAppointment);
   } catch (error) {
     console.log(error);
     
   }
+}
+
+export const sendSMSnotification = async (userId:string,content:string)=>{
+  try {
+      const message = await messaging.createSms(
+        ID.unique(),
+        content,
+        [],
+        [userId],
+      )
+      return parseStringify(message)
+  } catch (error) {
+     console.log(error);
+     
+  } 
 }

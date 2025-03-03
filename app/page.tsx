@@ -1,3 +1,4 @@
+'use client'
 import PaitentForm from "@/components/forms/PaitentForm";
 import React from "react";
 import Image from "next/image";

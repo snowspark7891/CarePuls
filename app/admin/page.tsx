@@ -1,4 +1,4 @@
-import {columns, Payment} from '@/components/tables/columns'
+import {columns} from '@/components/tables/columns'
 import {DataTable} from '@/components/tables/DataTable'
 import StatCard from '@/components/ui/StatCard'
 import { getRecentAppointmentList } from '@/lib/actions/appoitment.actions'
